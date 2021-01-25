@@ -32,9 +32,17 @@ syntax = "proto3";
 //import "google/protobuf/timestamp.proto";
 package com.example.grpc.chat;
 
+message SampleList 
+{
+    int32 id = 1;
+    string fullname = 2;
+}
+
 message ChatMessage {
     string from = 1;
     string message = 2;
+    int32 id = 3;
+    string fullname = 4;
 }
 
 message ChatMessageFromServer {

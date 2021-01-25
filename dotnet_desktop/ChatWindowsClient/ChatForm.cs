@@ -26,11 +26,11 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+using Com.Example.Grpc.Chat;
 using Grpc.Core;
 using System;
-using System.Windows.Forms;
-using Com.Example.Grpc.Chat;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace ChatWindowsClient
 {
@@ -69,7 +69,7 @@ namespace ChatWindowsClient
                     {
                         var serverMessage = _call.ResponseStream.Current;
                         var otherClientMessage = serverMessage.Message;
-                        var displayMessage = string.Format("{0}:{1}{2}", otherClientMessage.From, otherClientMessage.Message, Environment.NewLine);
+                        var displayMessage = string.Format("{3}. {0}:{1}{2}", otherClientMessage.From, otherClientMessage.Message, Environment.NewLine, otherClientMessage.Id);
                         chatTextBox.Text += displayMessage;
                     }
                     // Format and display the message
@@ -82,11 +82,15 @@ namespace ChatWindowsClient
             }
         }
 
+        private int i = 0;
+
         private async void sendButton_Click(object sender, EventArgs e)
         {
+            i += 1;
             // Create a chat message
             var message = new ChatMessage
             {
+                Id = i.ToString(),
                 From = nameTextBox.Text,
                 Message = messageTextBox.Text
             };
@@ -96,6 +100,11 @@ namespace ChatWindowsClient
             {
                 await _call.RequestStream.WriteAsync(message);
             }
+        }
+
+        private void chatTextBox_TextChanged_1(object sender, EventArgs e)
+        {
+            chatTextBox.ScrollToCaret();
         }
     }
 }

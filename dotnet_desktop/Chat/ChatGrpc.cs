@@ -42,10 +42,10 @@ namespace Com.Example.Grpc.Chat {
   {
     static readonly string __ServiceName = "com.example.grpc.chat.ChatService";
 
-    static readonly Marshaller<global::Com.Example.Grpc.Chat.ChatMessage> __Marshaller_ChatMessage = Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Com.Example.Grpc.Chat.ChatMessage.Parser.ParseFrom);
-    static readonly Marshaller<global::Com.Example.Grpc.Chat.ChatMessageFromServer> __Marshaller_ChatMessageFromServer = Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Com.Example.Grpc.Chat.ChatMessageFromServer.Parser.ParseFrom);
+    static readonly Marshaller<ChatMessage> __Marshaller_ChatMessage = Marshallers.Create((arg) => Google.Protobuf.MessageExtensions.ToByteArray(arg), ChatMessage.Parser.ParseFrom);
+    static readonly Marshaller<ChatMessageFromServer> __Marshaller_ChatMessageFromServer = Marshallers.Create((arg) => Google.Protobuf.MessageExtensions.ToByteArray(arg), ChatMessageFromServer.Parser.ParseFrom);
 
-    static readonly Method<global::Com.Example.Grpc.Chat.ChatMessage, global::Com.Example.Grpc.Chat.ChatMessageFromServer> __Method_chat = new Method<global::Com.Example.Grpc.Chat.ChatMessage, global::Com.Example.Grpc.Chat.ChatMessageFromServer>(
+    static readonly Method<ChatMessage, ChatMessageFromServer> __Method_chat = new Method<ChatMessage, ChatMessageFromServer>(
         MethodType.DuplexStreaming,
         __ServiceName,
         "chat",
@@ -53,15 +53,15 @@ namespace Com.Example.Grpc.Chat {
         __Marshaller_ChatMessageFromServer);
 
     /// <summary>Service descriptor</summary>
-    public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
+    public static Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Com.Example.Grpc.Chat.ChatReflection.Descriptor.Services[0]; }
+      get { return ChatReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of ChatService</summary>
     public abstract class ChatServiceBase
     {
-      public virtual global::System.Threading.Tasks.Task chat(IAsyncStreamReader<global::Com.Example.Grpc.Chat.ChatMessage> requestStream, IServerStreamWriter<global::Com.Example.Grpc.Chat.ChatMessageFromServer> responseStream, ServerCallContext context)
+      public virtual Task chat(IAsyncStreamReader<ChatMessage> requestStream, IServerStreamWriter<ChatMessageFromServer> responseStream, ServerCallContext context)
       {
         throw new RpcException(new Status(StatusCode.Unimplemented, ""));
       }
@@ -91,11 +91,11 @@ namespace Com.Example.Grpc.Chat {
       {
       }
 
-      public virtual AsyncDuplexStreamingCall<global::Com.Example.Grpc.Chat.ChatMessage, global::Com.Example.Grpc.Chat.ChatMessageFromServer> chat(Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      public virtual AsyncDuplexStreamingCall<ChatMessage, ChatMessageFromServer> chat(Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return chat(new CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual AsyncDuplexStreamingCall<global::Com.Example.Grpc.Chat.ChatMessage, global::Com.Example.Grpc.Chat.ChatMessageFromServer> chat(CallOptions options)
+      public virtual AsyncDuplexStreamingCall<ChatMessage, ChatMessageFromServer> chat(CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_chat, null, options);
       }
